@@ -1,6 +1,5 @@
 class Character:
-  def __init__(self, name, health=100,
-               damage=3, defence=0):
+  def __init__(self, name, health=100, damage=3, defence=0):
       self.name = name
       self.health = health
       self.damage = damage
@@ -13,9 +12,12 @@ class Character:
              f'Захист: {self.defence}'
 
   def take_damage(self, damage):
-      damage = max(damage, 0)
+      damage = max(damage - self.defence, 0)
       self.health -= damage
       return damage
 
   def attack(self, target):
       return target.take_damage(self.damage)
+
+  def is_alive(self):
+      return self.health > 0
